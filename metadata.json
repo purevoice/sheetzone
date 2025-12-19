@@ -1,0 +1,5 @@
+{
+  "name": "Offline Data Pivot Analyzer",
+  "description": "An offline-first web application to upload, process, and visualize Excel/CSV data using an interactive pivot table. All data processing happens securely in your browser.",
+  "requestFramePermissions": []
+}

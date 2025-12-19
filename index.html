@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline Data Pivot Analyzer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Luckysheet CSS -->
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/luckysheet@latest/dist/plugins/css/pluginsCss.css' />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/luckysheet@latest/dist/plugins/plugins.css' />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/luckysheet@latest/dist/css/luckysheet.css' />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/luckysheet@latest/dist/assets/iconfont/iconfont.css' />
+  <style>
+    html, body, #root {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Prevent scrollbars on the body */
+    }
+    #initial-loading-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        text-align: center;
+        font-family: sans-serif;
+        color: #d1d5db;
+        padding: 2rem;
+    }
+    #initial-loading-message h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fff;
+    }
+    #initial-loading-message code {
+        background-color: #1f2937;
+        color: #9ca3af;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "xlsx": "https://esm.sh/xlsx@^0.18.5"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-900 text-gray-100 antialiased">
+  <div id="root">
+    <div id="initial-loading-message">
+        <h1>Loading Analyzer...</h1>
+        <p class="mt-4">If this message remains, the application could not start.</p>
+        <p class="mt-2">This can happen if you opened this file directly from your computer.</p>
+        <p class="mt-2">For security reasons, please serve this folder using a local web server.</p>
+        <p class="mt-4">See the <code>file-system-instructions.md</code> file for easy, one-command instructions.</p>
+    </div>
+    <noscript>
+        <h1>JavaScript Required</h1>
+        <p>This application is interactive and requires JavaScript to be enabled in your browser.</p>
+    </noscript>
+  </div>
+  <!-- SheetJS for Excel/CSV parsing (used by Web Worker) -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js" defer></script>
+  <!-- Luckysheet JS -->
+  <script src="https://cdn.jsdelivr.net/npm/luckysheet@latest/dist/plugins/js/plugin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luckysheet@latest/dist/luckysheet.umd.js"></script>
+  
+  <script type="module" src="/index.tsx"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
